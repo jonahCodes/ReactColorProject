@@ -1,4 +1,5 @@
 import "./styles.css";
+//test commit
 import Palette from "./colorApp/Palette";
 import seedColors from "./seedColors";
 export default function App() {
