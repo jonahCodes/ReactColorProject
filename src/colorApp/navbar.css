@@ -43,3 +43,7 @@
   display: inline-block;
   margin: 0 10px;
 }
+.select-container {
+  margin-left: auto;
+  margin-right: 1rem;
+}
