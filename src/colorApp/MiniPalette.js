@@ -1,5 +1,6 @@
-import { Component } from "react";
-const classes = {
+import { withStyles } from "react-jss";
+
+const styles = {
   root: {
     border: "1px solid black",
     backgroundColor: "white",
@@ -29,18 +30,18 @@ const classes = {
     fontSize: "1.5rem",
   },
 };
-export default class MiniPalette extends Component {
-  render() {
-    const { paletteName, emoji } = this.props;
-    return (
-      <div style={classes.root}>
-        <div style={classes.colors}>
-          <h5 style={classes.title}>
-            {paletteName}
-            <span style={classes.emoji}>{emoji}</span>
-          </h5>
-        </div>
+
+function MiniPalette(props) {
+  const { classes, paletteName, emoji } = props;
+  return (
+    <div className={classes.root}>
+      <div className={classes.colors}>
+        <h5 className={classes.title}>
+          {paletteName}
+          <span className={classes.emoji}>{emoji}</span>
+        </h5>
       </div>
-    );
-  }
+    </div>
+  );
 }
+export default withStyles(styles)(MiniPalette);
