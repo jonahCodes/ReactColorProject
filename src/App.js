@@ -34,6 +34,11 @@ export default class App extends Component {
             />
           )}
         />
+        <Route
+          exact
+          path="/palette/:paletteId/:colorId"
+          render={() => <h1>singleColorComponent</h1>}
+        />
       </Switch>
     );
   }
