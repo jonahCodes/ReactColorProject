@@ -1,6 +1,7 @@
 import "./styles.css";
 //test commit
 import { Component } from "react";
+import ColorPalette from "./colorApp/ColorPalette";
 import Palette from "./colorApp/Palette";
 import seedColors from "./seedColors";
 import { generatePalette } from "./colorApp/colorHelper";
@@ -37,7 +38,7 @@ export default class App extends Component {
         <Route
           exact
           path="/palette/:paletteId/:colorId"
-          render={() => <h1>singleColorComponent</h1>}
+          render={() => <ColorPalette />}
         />
       </Switch>
     );
