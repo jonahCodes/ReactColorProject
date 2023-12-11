@@ -42,8 +42,12 @@ export default class ColorPalette extends Component {
         <div className="Palette-colors">
           {colorBoxes}
           <div className="go-back ColorBox">
-            <Link to={`/palette/${id}`} className="back-button">
-              go back
+            <Link
+              to={`/palette/${id}`}
+              className="back-button"
+              id="back-button"
+            >
+              GO BACK
             </Link>
           </div>
         </div>
