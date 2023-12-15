@@ -1,16 +1,16 @@
 import { Component } from "react";
+import MenuItem from "@mui/material/MenuItem";
 import Slider from "rc-slider";
 import Select from "@mui/material/Select";
 import Snackbar from "@mui/material/Snackbar";
+import withStyles from "react-jss";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
+import styles from "./styles/NavbarStyles";
 import "rc-slider/assets/index.css";
 
-import "./navbar.css";
-import MenuItem from "@mui/material/MenuItem";
-
-export class Navbar extends Component {
+class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,17 +26,18 @@ export class Navbar extends Component {
     this.setState({ open: false });
   };
   render() {
-    const { level, changeLevel, showingSlider } = this.props;
+    const { level, changeLevel, showingSlider, classes } = this.props;
     const { format, open } = this.state;
+    console.log(classes);
     return (
-      <header className="Navbar">
-        <div className="logo">
+      <header className={classes.Navbar}>
+        <div className={classes.logo}>
           <Link to="/">reactColorApp</Link>
         </div>
         {showingSlider && (
-          <div className="slider-container">
+          <div>
             <span>Level: {level}</span>
-            <div className="slider">
+            <div className={classes.slider}>
               <Slider
                 defaultValue={level}
                 min={100}
@@ -48,7 +49,7 @@ export class Navbar extends Component {
           </div>
         )}
 
-        <div className="select-container">
+        <div className={classes.SelectContainer}>
           <Select value={format} onChange={this.handleFormatChange}>
             <MenuItem value="hex">HEX - #ffffff</MenuItem>
             <MenuItem value="rgb">RGB - rgb(255,255,255)</MenuItem>
@@ -83,3 +84,4 @@ export class Navbar extends Component {
     );
   }
 }
+export default withStyles(styles)(Navbar);
