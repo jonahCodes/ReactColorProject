@@ -10,9 +10,10 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import DraggableColorBox from "./DraggableColorBox.js";
 import Button from "@mui/material/Button";
 import { ChromePicker } from "react-color";
-
+import "./styles/newPaletteForm.css";
 import * as React from "react";
 
 const drawerWidth = 400;
@@ -144,15 +145,12 @@ export default function NewPaletteForm() {
           Add Color
         </Button>
       </Drawer>
-      <Main open={open}>
+      <Main open={open} className="content">
         <DrawerHeader />
-        <ul>
-          {color.map((color, index) => (
-            <li style={{ backgroundColor: color }} key={index}>
-              {color}
-            </li>
-          ))}
-        </ul>
+
+        {color.map((color, index) => (
+          <DraggableColorBox key={index} color={color} />
+        ))}
       </Main>
     </Box>
   );
