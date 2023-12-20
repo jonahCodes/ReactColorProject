@@ -65,7 +65,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-export default function NewPaletteForm() {
+export default function NewPaletteForm(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [currentColor, setColor] = React.useState("teal");
@@ -84,7 +84,16 @@ export default function NewPaletteForm() {
       ValidatorForm.removeValidationRule("isColorNameUnique", "isColorUnique");
     };
   }, [color, currentColor]);
-
+  const handleSubmit = () => {
+    const newName = "testPalette";
+    const newPalette = {
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g, "-"),
+      colors: color,
+    };
+    props.savePalette(newPalette);
+    props.history.push("/");
+  };
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -106,7 +115,7 @@ export default function NewPaletteForm() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar color="default" position="fixed" open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -120,6 +129,9 @@ export default function NewPaletteForm() {
           <Typography variant="h6" noWrap component="div">
             Persistent drawer
           </Typography>
+          <Button variant="contained" color="primary" onClick={handleSubmit}>
+            Save Palette
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
