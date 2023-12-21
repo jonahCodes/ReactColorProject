@@ -80,11 +80,20 @@ export default function NewPaletteForm(props) {
     ValidatorForm.addValidationRule("isColorUnique", () =>
       color.every(({ color }) => color !== currentColor),
     );
+    ValidatorForm.addValidationRule("isPaletteNameUnique", (value) =>
+      props.palettes.every(
+        ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase(),
+      ),
+    );
     // Cleanup validation rule on component unmount
     return () => {
-      ValidatorForm.removeValidationRule("isColorNameUnique", "isColorUnique");
+      ValidatorForm.removeValidationRule(
+        "isColorNameUnique",
+        "isColorUnique",
+        "isPaletteNameUnique",
+      );
     };
-  }, [color, currentColor]);
+  }, [color, currentColor, props.palettes]);
   const handleSubmit = () => {
     const newName = newPaletteName;
     const newPalette = {
@@ -116,6 +125,7 @@ export default function NewPaletteForm(props) {
   const handleColorNameChange = (evt) => {
     setName(evt.target.value);
   };
+  console.log(props);
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -138,6 +148,8 @@ export default function NewPaletteForm(props) {
               label="Palette Name"
               name="newPaletteName"
               value={newPaletteName}
+              validators={["required", "isPaletteNameUnique"]}
+              errorMessages={["Enter PaletteName", "name Already used"]}
               onChange={handleChange}
             />
             <Button variant="contained" color="primary" type="submit">
